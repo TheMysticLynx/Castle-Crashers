@@ -8,12 +8,12 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Scene Colliders
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Player Hitbox
+  - Enemy Hitbox
+  - Player Collider
   - 
   - 
   - 
