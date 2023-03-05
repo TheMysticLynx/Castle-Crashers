@@ -9,10 +9,13 @@ public class PlayerMovement : MonoBehaviour
     public float movementSpeed = 4f;
     public Vector2 movementAxisMultiplier = new Vector2(1, 0.5f);
     private Rigidbody2D _rb;
+    private Animator _animator;
+    public float yWall = 0f;
 
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -48,11 +51,17 @@ public class PlayerMovement : MonoBehaviour
         var horizontalMovement = Input.GetAxisRaw("Horizontal");
         var verticalMovement = Input.GetAxisRaw("Vertical");
 
-        var moveVector = new Vector3(horizontalMovement, verticalMovement).normalized
-                         * (movementSpeed * Time.fixedDeltaTime);
+        //takes input and move speed and multiplies it with the perspective y modifier
+        var moveVector = (Vector3)(new Vector2(horizontalMovement, verticalMovement)
+                         * movementAxisMultiplier) * (movementSpeed * Time.fixedDeltaTime);
         var newPosition = transform.position + moveVector;
 
-        _rb.MovePosition(newPosition * movementAxisMultiplier);
+        //if player too high... dont
+        if (newPosition.y > yWall) 
+        {
+            newPosition.y = transform.position.y;
+        }
+        _rb.MovePosition(newPosition);
 
         #endregion
     }
