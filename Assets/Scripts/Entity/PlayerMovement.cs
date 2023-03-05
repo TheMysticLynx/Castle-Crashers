@@ -57,12 +57,14 @@ public class PlayerMovement : MonoBehaviour
         var newPosition = transform.position + moveVector;
 
         //if player too high... dont
-        if (newPosition.y > yWall) 
+        if (newPosition.y > yWall)
         {
-            newPosition.y = yWall;
+            var position = transform.position;
+            position = new Vector3(position.x, yWall, position.z);
+            transform.position = position;
         }
-        _rb.MovePosition(newPosition);
 
+        _rb.MovePosition(newPosition);
         #endregion
     }
 }
