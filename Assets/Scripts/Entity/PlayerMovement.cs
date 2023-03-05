@@ -59,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
         //if player too high... dont
         if (newPosition.y > yWall) 
         {
-            newPosition.y = transform.position.y;
+            newPosition.y = yWall;
         }
         _rb.MovePosition(newPosition);
 
